@@ -1,4 +1,5 @@
-		var inputTxt = document.getElementById('inputTxt');
+		
+        var inputTxt = document.getElementById('inputTxt');
         var currentValue = inputTxt.value;
 
         var stack1 = new Array();
@@ -7,14 +8,13 @@
 
 
         function saveField() {
-
-                currentValue = inputTxt.value;
-                stack1.push(currentValue);
-                stack2 = new Array();
+            currentValue = inputTxt.value;
+            stack1.push(currentValue);
+            stack2 = new Array();
         };
 
         inputTxt.onchange = function(){
-                saveField()
+            saveField()
         };
 
 
@@ -22,12 +22,11 @@
             if(stack1.length == 1) return;     
             currentValue = stack1.pop();
             stack2.push(currentValue);   
-
             inputTxt.value = stack1[stack1.length-1];
         }
 
         function reDo() {
-            if(stack2.length == 1) return;   
+            if(stack2.length == 0) return;   
             currentValue = stack2.pop();            
             inputTxt.value = currentValue;
             stack1.push(currentValue);
@@ -66,20 +65,55 @@
         }  
           
         function capitalize() {
-            var txt = inputTxt.value;
-            processedText = txt.toLowerCase();
+            processedText = inputTxt.value.toLowerCase();
             processedText = processedText.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
-            inputTxt.value=processedText; 
+            inputTxt.value = processedText; 
             saveField();
         } 
           
         function firstCapitalize() {
-            var txt = inputTxt.value;
-            processedText = txt.toLowerCase();
+            processedText = inputTxt.value.toLowerCase();
             processedText = processedText.charAt(0).toUpperCase() + processedText.slice(1);
-            inputTxt.value=processedText; 
+            inputTxt.value = processedText; 
             saveField();
         } 
+          
+        // function addPlus() {
+        //     processedText = inputTxt.value;
+        //     processedText = processedText.replace(/(?:^|\s)\S/g, function(a) { return ("+"+a); });
+        //     inputTxt.value = processedText; 
+        //     saveField();
+        // }          
+
+        function addQuotes() {
+            inputTxt.value = "\"" + inputTxt.value + "\""; 
+            saveField();
+        }
+
+        function addBrackets() {
+            inputTxt.value = "[" + inputTxt.value + "]"; 
+            saveField();
+        }
+
+        function addDash() {
+            inputTxt.value = "-" + inputTxt.value; 
+            saveField();
+        }
+
+        function addDashBrackets() {
+            inputTxt.value = "-[" + inputTxt.value + "]"; 
+            saveField();
+        }
+
+        function addDashQuotes() {
+            inputTxt.value = "-\"" + inputTxt.value + "\""; 
+            saveField();
+        }
+
+
+
+
+
 
 
         $("button").click(function(){
